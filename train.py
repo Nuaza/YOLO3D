@@ -175,7 +175,7 @@ def train(
 def parse_opt():
     parser = argparse.ArgumentParser(description='Regressor Model Training')
     parser.add_argument('--epochs', type=int, default=10, help='Number of epochs')
-    parser.add_argument('--batch_size', type=int, default=32, help='Number of batch size')
+    parser.add_argument('--batch_size', type=int, default=8, help='Number of batch size')
     parser.add_argument('--alpha', type=float, default=0.6, help='Aplha default=0.6 DONT CHANGE')
     parser.add_argument('--w', type=float, default=0.4, help='w DONT CHANGE')
     parser.add_argument('--num_workers', type=int, default=2, help='Total # workers, for colab & kaggle use 2')
@@ -184,7 +184,7 @@ def parse_opt():
     parser.add_argument('--train_path', type=str, default=ROOT / 'dataset/KITTI/training', help='Training path KITTI')
     parser.add_argument('--model_path', type=str, default=ROOT / 'weights', help='Weights path, for load and save model')
     parser.add_argument('--select_model', type=str, default='resnet18', help='Model selection: {resnet18, vgg11}')
-    parser.add_argument('--api_key', type=str, default='', help='API key for comet.ml')
+    parser.add_argument('--api_key', type=str, default='JMqfn2AGMmcX2O4PNwCncRyPW', help='API key for comet.ml')
 
     opt = parser.parse_args()
 
