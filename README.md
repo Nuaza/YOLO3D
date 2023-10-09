@@ -1,4 +1,4 @@
-# 三维目标检测的YOLO实现 YOLO For 3D Object Detection
+# 3D目标检测的YOLO实现 YOLO For 3D Object Detection
 
 #### Note
 原作者目前创建了一个新的仓库，使用pytorch lightning技术和更多的骨干网络来提升YOLO3D的性能，目前正在开发中。具体可参考 [ruhyadi/yolo3d-lightning](https://github.com/ruhyadi/yolo3d-lightning)
