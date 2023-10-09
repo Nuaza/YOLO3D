@@ -1,50 +1,50 @@
-# YOLO For 3D Object Detection
+# 三维目标检测的YOLO实现 YOLO For 3D Object Detection
 
 #### Note
-I have created a new repository of improvements of YOLO3D wrapped in pytorch lightning and more various object detector backbones, currently on development. Please check [ruhyadi/yolo3d-lightning](https://github.com/ruhyadi/yolo3d-lightning).
+原作者目前创建了一个新的仓库，使用pytorch lightning技术和更多的骨干网络来提升YOLO3D的性能，目前正在开发中。具体可参考 [ruhyadi/yolo3d-lightning](https://github.com/ruhyadi/yolo3d-lightning)
 
-Unofficial implementation of [Mousavian et al](https://arxiv.org/abs/1612.00496) in their paper *3D Bounding Box Estimation Using Deep Learning and Geometry*. YOLO3D uses a different approach, as the detector uses YOLOv5 which previously used Faster-RCNN, and Regressor uses ResNet18/VGG11 which was previously VGG19.
+关于作者 [Mousavian et al](https://arxiv.org/abs/1612.00496) 的论文 *3D Bounding Box Estimation Using Deep Learning and Geometry* 的非官方实现的一个fork. YOLO3D 的检测头使用的是YOLOv5，并使用Resnet18/VGG11作为回归器
 
 ![inference](docs/demo.gif)
 
-## Installation
-For installation you can use virtual environment like anaconda or using docker image. For anaconda follow:
+## 安装
+可以使用像anaconda或者docker镜像这样的虚拟环境进行安装，对于anaconda请使用以下命令：
 
-### Ananconda Virtual Env
-Create conda environment
+### Anaconda虚拟环境
+创建虚拟环境
 ```
 conda create -n yolo3d python=3.8 numpy
 ```
-Install PyTorch and torchvision version 1.8 above. If your GPU doesn't support it, please follow [Nelson Liu blogs](https://github.com/nelson-liu/pytorch-manylinux-binaries). 
+安装1.8版本以上的Pytorch和对应的torchvision。如果你的GPU不支持，请参考 [Nelson Liu blogs](https://github.com/nelson-liu/pytorch-manylinux-binaries). 
 ```
 pip install torch==1.8.1 torcvision==0.9.1
 ```
-Last, install requirements
+最后，安装相关依赖文件
 ```
 pip install -r requirements.txt
 ```
 
-### Docker Engine 
-Docker engine is easy way to install all you need. Pull docker image from repository:
+### Docker引擎
+Docker引擎是一种安装项目所需要的所有文件的最简单的方法。从仓库拉取docker镜像：
 ```
 docker pull ruhyadi/yolo3d:latest
 ```
-run docker container from docker image with
+使用以下命令，由docker镜像运行docker容器：
 ```
 cd ${YOLO3D_DIR}
 ./runDocker.sh
 ```
-You will get in to docker container interactive terminal. You can run inference code or flask app, follow code below.
+你将会进入docker容器的交互界面。可以使用以下代码来直接运行推理代码或者flask程序
 
-### Download Pretrained Weights
-In order to run inference code or resuming training, you can download pretrained ResNet18 or VGG11 model. I have train model with 10 epoch each. You can download model with `resnet18` or `vgg11` for `--weights` arguments.
+### 下载预训练模型
+若要运行推理或训练代码，可以下载预训练的Resnet18或VGG11模型。原作者已经训练了10个epochs。
 ```
 cd ${YOLO3D_DIR}/weights
 python get_weights.py --weights resnet18
 ```
 
-## Inference
-For inference with pretrained model you can run code below. It can be run in conda env or docker container. 
+## 推理
+若要使用预训练模型进行推理，可以使用以下命令。它可以被运行在conda虚拟环境或者docker容器中。
 ```
 python inference.py \
     --weights yolov5s.pt \
@@ -54,10 +54,10 @@ python inference.py \
     --output_path runs/ \
     --show_result --save_result
 ```
-Inference can be run on Colab Notebook, please visit [this link](https://colab.research.google.com/drive/1vhgGRRDqHEqsrqZXBjBJHDFWJk9Pw0qZ?usp=sharing).
+也可以在Colab Notebook中运行推理程序，请参考 [这个链接](https://colab.research.google.com/drive/1vhgGRRDqHEqsrqZXBjBJHDFWJk9Pw0qZ?usp=sharing).
 
-## Training
-YOLO3D model can be train with PyTorch or PyTorch Lightning. In order to train you need API KEY for [comet.ml](https://www.comet.ml) (visualize your training loss/accuracy). Follow comet.ml documentation to get API key.
+## 训练
+YOLO3D模型可以使用Pytorch或Pytorch lightning进行训练。若要进行训练，你需要一个 [comet.ml](https://www.comet.ml) （用于可视化你的训练损失/准确度）的APi key。请参考comet.ml的官方文档以获得API key
 ```
 python train.py \
     --epochs 10 \
@@ -69,7 +69,7 @@ python train.py \
     --select_model resnet18 \
     --api_key xxx
 ```
-In order train with pytorch lightning run code below:
+可以使用以下命令调用pytorch lightning进行训练：
 ```
 !python train_lightning.py \
     --train_path dataset/KITTI/training \
@@ -84,7 +84,7 @@ In order train with pytorch lightning run code below:
     --api_key xxx
 ```
 
-## Reference
+## 参考
 - [YOLOv5 by Ultralytics](https://github.com/ultralytics/yolov5)
 - [shakdem/3D-BoungingBox](https://github.com/skhadem/3D-BoundingBox)
 
@@ -98,3 +98,5 @@ In order train with pytorch lightning run code below:
       primaryClass={cs.CV}
 }
 ```
+
+### 汉化by [Nuaza](https://github.com/Nuaza)
