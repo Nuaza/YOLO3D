@@ -8,11 +8,12 @@ from random import shuffle
 import sys
 from pathlib import Path
 
+import comet_ml
+from comet_ml import Experiment
+
 from tqdm import tqdm
 from torch.utils.tensorboard import SummaryWriter
 writer = SummaryWriter()
-
-from comet_ml import Experiment
 
 from script.Dataset import Dataset
 from script.Model import ResNet18, VGG11, OrientationLoss
@@ -32,11 +33,11 @@ ROOT = Path(os.path.relpath(ROOT, Path.cwd()))  # relative
 # model factory to choose model
 model_factory = {
     'resnet18': resnet18(pretrained=True),
-    'vgg11': vgg11(pretrained=True)
+#    'vgg11': vgg11(pretrained=True)
 }
 regressor_factory = {
     'resnet18': ResNet18,
-    'vgg11': VGG11
+#    'vgg11': VGG11
 }
 
 
@@ -107,7 +108,7 @@ def train(
             pass
 
     if latest_model is not None:
-        checkpoint = torch.load(model_path + latest_model)
+        checkpoint = torch.load(model_path + '/' + latest_model)
         model.load_state_dict(checkpoint['model_state_dict'])
         opt_SGD.load_state_dict(checkpoint['optimizer_state_dict'])
         first_epoch = checkpoint['epoch']
@@ -174,8 +175,8 @@ def train(
 
 def parse_opt():
     parser = argparse.ArgumentParser(description='Regressor Model Training')
-    parser.add_argument('--epochs', type=int, default=10, help='Number of epochs')
-    parser.add_argument('--batch_size', type=int, default=8, help='Number of batch size')
+    parser.add_argument('--epochs', type=int, default=100, help='Number of epochs')
+    parser.add_argument('--batch_size', type=int, default=32, help='Number of batch size')
     parser.add_argument('--alpha', type=float, default=0.6, help='Aplha default=0.6 DONT CHANGE')
     parser.add_argument('--w', type=float, default=0.4, help='w DONT CHANGE')
     parser.add_argument('--num_workers', type=int, default=2, help='Total # workers, for colab & kaggle use 2')
